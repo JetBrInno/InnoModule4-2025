@@ -9,6 +9,11 @@ public class Main {
     public static void main(String[] args) {
         WebDriver driver = new ChromeDriver();
 
-        driver.quit();
+        driver.get("https://www.labirint.ru/");
+
+
+        if (driver != null) {
+            driver.quit();
+        }
         }
 }
