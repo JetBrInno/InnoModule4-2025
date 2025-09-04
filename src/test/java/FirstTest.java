@@ -1,8 +1,10 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,6 +17,7 @@ public class FirstTest {
     @BeforeEach
     public void setUp() {
         driver = new ChromeDriver();
+        driver.manage().window().setPosition(new Point(1900, 0));
         driver.get(baseUrl);
     }
 
@@ -30,6 +33,35 @@ public class FirstTest {
     public void testGet() {
         driver.get(baseUrl);
         driver.get(baseUrl + "rating");
+    }
+
+    @Test
+    public void testNavigate() {
+        driver.navigate().to(baseUrl);
+        driver.navigate().refresh();
+        driver.navigate().back();
+        driver.navigate().forward();
+    }
+
+
+    @Test
+    public void testJs() {
+        driver.get("https://the-internet.herokuapp.com/javascript_alerts");
+
+       Alert alert =  driver.switchTo().alert();
+       String text = alert.getText();
+       alert.sendKeys("Text");
+       alert.accept();
+       assertEquals("I am a JS prompt", text);
+    }
+
+    @Test
+    public void testManageAndCookie() {
+        // driver.manage().window().fullscreen();
+       driver.manage().window().maximize();
+       driver.manage().addCookie(new Cookie("cookie_policy", "1"));
+       driver.navigate().refresh();
+       driver.navigate().refresh();
     }
 
     @AfterEach
