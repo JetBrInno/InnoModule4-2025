@@ -1,10 +1,10 @@
+package other;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
