@@ -7,6 +7,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,8 +46,34 @@ public class TestLocators {
         cartButton.click();
     }
 
+
+    @Test
+    public void testFindElementByFollowingSib() {
+        //WebElement cartButton = driver.findElement(By.xpath("//*[text() = 'Корзина']"));
+        WebElement a = driver.findElement(By.xpath("//span[@class='product-title large-name']/.."));
+        WebElement span = findFollowingElement(a, "span");
+        span.click();
+    }
+
+    @Test
+    public void testFindButton() {
+        WebElement header = driver.findElement(By.xpath("//span[@class='b-header-b-search-outer-e-input']"));
+        WebElement button = findFollowingElement(header, "button");
+        button.click();
+    }
+
+    @Test
+    public void testFindAllDivs() {
+        List<WebElement> divs = driver.findElements(By.xpath("//div"));
+        System.out.println(divs.get(4));
+    }
+
     private WebElement findElementByText(String tagName, String text) {
         return driver.findElement(By.xpath("//"+ tagName + "[text()='" + text + "']"));
+    }
+
+    private WebElement findFollowingElement(WebElement element, String siblingTag) {
+        return element.findElement(By.xpath( "following-sibling::" + siblingTag));
     }
 //
 //    WebElement cartButton = driver.findElement(By.id("abc"));
