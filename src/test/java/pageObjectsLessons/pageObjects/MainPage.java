@@ -1,6 +1,8 @@
 package pageObjectsLessons.pageObjects;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjectsLessons.pageObjects.components.Header;
 
 
 // Плюсы пейдж обджектов
@@ -11,21 +13,11 @@ import org.openqa.selenium.*;
 
 // Минусы пейдж обджектов
 // 1. Первый раз писать пейджи долго, нужно описать все нужные поля и методы. Поэтому тестов должно быть много, чтобы это было рентабельно.
-// 2.
-public class MainPage {
-    private final WebDriver driver;
+// 2. Повторяющиеся элементы на разных страницах
+public class MainPage extends BasePage {
 
-    private static final String baseUrl = "https://www.labirint.ru/";
-
-    public By inputSearchBy = By.xpath("//input[@placeholder='Поиск по Лабиринту']");
-
-    public MainPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public void searchBookByName(String name) {
-        WebElement input = driver.findElement(inputSearchBy);
-        input.sendKeys(name, Keys.RETURN);
+    public MainPage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
     public void firstOpen() {
