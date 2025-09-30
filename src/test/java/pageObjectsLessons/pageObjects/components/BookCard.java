@@ -1,5 +1,6 @@
 package pageObjectsLessons.pageObjects.components;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -29,10 +30,7 @@ public class BookCard {
         return element.findElement(button);
     }
 
-    public void clickButtonToCart() {
-        findButton().click();
-    }
-
+    @Step("Ждем, пока кнопка не станет равна кнопке оформить")
     public void waitForButtonChanged() {
         wait.until(ExpectedConditions.textToBePresentInElement(findButton(), "оформить"));
     }

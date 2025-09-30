@@ -1,8 +1,8 @@
 package pageObjectsLessons.tests;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.Description;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,22 +14,28 @@ import pageObjectsLessons.pageObjects.components.BookCard;
 import java.time.Duration;
 import java.util.List;
 
+import static io.qameta.allure.Allure.step;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AddItemFromSearchPageTest extends BaseTest {
 
 
     @Test
+    @DisplayName("Добавить товар в корзину")
+    @Story("Как пользователь я могу искать книги и добавлять их в корзину")
+    @Description("Добавление товара в корзину и переход в корзину по кнопке оформить")
+    @Tags({@Tag("позитивный"), @Tag("смоук")})
     public void testAddItemToCart()  {
         mainPage.header.searchBookByName("JAVA");
         searchResultsPage.waitUntilPageOpened();
         BookCard card = searchResultsPage.getFoundedBook(0);
         WebElement firstButton = card.findButton();
-        firstButton.click();
+        step("Жмем на кнопку Добавить", () -> firstButton.click());
         card.waitForButtonChanged();
-        firstButton.click();
+        step("Жмем на кнопку Оформить", () -> firstButton.click());
 
-        wait.until(ExpectedConditions.textToBe(By.xpath("//span[contains(@class,'j-cart-count')]"), "1"));
+        step("Проверяем счетчик корзины", () -> wait.until(ExpectedConditions.textToBe(By.xpath("//span[contains(@class,'j-cart-count')]"), "1")));
     }
 
     @Test

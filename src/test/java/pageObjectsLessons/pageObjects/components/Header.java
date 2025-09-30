@@ -1,5 +1,6 @@
 package pageObjectsLessons.pageObjects.components;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 
 public class Header {
@@ -11,6 +12,7 @@ public class Header {
         this.driver = driver;
     }
 
+    @Step("Найти книгу {name}")
     public void searchBookByName(String name) {
         WebElement input = driver.findElement(inputSearchBy);
         input.sendKeys(name, Keys.RETURN);
