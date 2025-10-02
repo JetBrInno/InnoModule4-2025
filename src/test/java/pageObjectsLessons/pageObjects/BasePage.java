@@ -1,8 +1,11 @@
 package pageObjectsLessons.pageObjects;
 
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -29,5 +32,15 @@ public abstract class BasePage {
         this.wait = wait;
         PageFactory.initElements(driver, this);
         header = new Header(driver);
+    }
+
+    @Attachment(type = "image/png", value = "element", fileExtension = "png")
+    public byte[] takeScreen(WebElement element) {
+        return element.getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Attachment(type = "text/plain", value = "sql", fileExtension = "txt")
+    public String takeSQL() {
+        return "SELECT * FROM TABLE";
     }
 }

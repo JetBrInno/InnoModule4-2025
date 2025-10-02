@@ -8,10 +8,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pageObjectsLessons.helpers.ScreenHelper;
 import pageObjectsLessons.pageObjects.MainPage;
 import pageObjectsLessons.pageObjects.SearchResultsPage;
 import pageObjectsLessons.pageObjects.components.BookCard;
 
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class SearchFieldTest extends BaseTest {
         mainPage.header.searchBookByName("JAVA");
         searchResultsPage.waitUntilPageOpened();
         BookCard card = searchResultsPage.getFoundedBook(0);
+        searchResultsPage.takeSQL();
+        searchResultsPage.takeScreen(card.findButton());
+        ScreenHelper.savePageScreenshot(driver, Path.of("screen.png"));
         wait.until(ExpectedConditions.attributeContains(card.findTitle(), "title", "Java. устранение проблем. Чтение, отладка и оптимизация JVM-приложений"));
 
         card = searchResultsPage.getFoundedBook(2);
