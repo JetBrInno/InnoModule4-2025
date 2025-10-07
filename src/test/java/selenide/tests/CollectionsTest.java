@@ -43,4 +43,8 @@ public class CollectionsTest {
         ElementsCollection elements = ul.findAll("li");
         elements.filter(hasChild("a")).shouldHave(size(4));
     }
+
+    // HOMEWORK
+    // 1. Написать тест на проверку раскрытия бокового меню на странице Рейтинги https://www.labirint.ru/rating/?id_genre=-1&nrd=1
+    // 2. В процессе - создать пейдж обджект на селениде для страницы рейтинги
 }
