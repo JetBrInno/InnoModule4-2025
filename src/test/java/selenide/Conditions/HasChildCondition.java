@@ -30,7 +30,7 @@ public class HasChildCondition extends WebElementCondition {
             return CheckResult.accepted();
         }
         catch (NoSuchElementException exception) {
-            return CheckResult.rejected("Такой дочерний элемент отсутствует", "");
+            return CheckResult.rejected("Этот дочерний элемент отсутствует", "");
         }
     }
 }
