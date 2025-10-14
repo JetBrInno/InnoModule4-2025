@@ -23,6 +23,7 @@ public class CollectionsTest {
         Configuration.timeout = 10000;
         Configuration.browserSize = "1280x1024";
         Configuration.browserPosition = "1600x0";
+        Configuration.headless = true;
         open(baseUrl);
     }
 
