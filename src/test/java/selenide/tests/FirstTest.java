@@ -47,24 +47,4 @@ public class FirstTest {
         System.out.println(title);
     }
 
-    @Test
-    public void testNavigate() {
-
-    }
-
-
-    @Test
-    public void testJs() {
-
-    }
-
-    @Test
-    public void testManageAndCookie() {
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-
-    }
 }
