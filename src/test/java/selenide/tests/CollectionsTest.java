@@ -1,10 +1,14 @@
 package selenide.tests;
 
 import com.codeborne.selenide.*;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import selenide.Conditions.HasChildCondition;
+import selenide.elements.Button;
+import selenide.elements.LocatorTypes;
 
 import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
@@ -18,6 +22,11 @@ public class CollectionsTest {
 
     @BeforeEach
     public void setUp() {
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                        .screenshots(true)
+                        .savePageSource(true)
+                //  .includeSelenideSteps(true)
+        );
         Configuration.browser = "chrome";
         Configuration.headless = false;
         Configuration.timeout = 10000;
@@ -29,7 +38,8 @@ public class CollectionsTest {
 
     @Test
     public void testListByText() {
-        SelenideElement button = $x("//button[@id='my-dropdown-1']");
+        //SelenideElement button = $x("");
+        Button button = new Button(LocatorTypes.XPATH, "//button[@id='my-dropdown-1']", "Синяя кнопка");
         button.click();
         SelenideElement ul = button.sibling(0);
         ElementsCollection elements = ul.findAll("li");

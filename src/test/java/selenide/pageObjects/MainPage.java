@@ -2,6 +2,7 @@ package selenide.pageObjects;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
+import io.qameta.allure.Step;
 import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Selenide.refresh;
@@ -24,6 +25,7 @@ public class MainPage extends BasePage {
         refresh();
     }
 
+    @Step("Открываем Главную страницу")
     public void open() {
         Selenide.open(baseUrl);
     }
