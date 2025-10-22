@@ -21,7 +21,9 @@ on:
 
 jobs:
   build:
-
+    environment: 
+          name: github-actions
+          url: ${{steps.deployment.outputs.page_url}}
     runs-on: ubuntu-latest
 
     steps:
