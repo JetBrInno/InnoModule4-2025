@@ -27,29 +27,26 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+    - name: Install Allure  
+      run: |  
+        curl -o allure.zip -L https://github.com/allure-framework/allure2/releases/download/2.25.0/allure-2.25.0.zip  
+        sudo apt-get install -y unzip  
+        unzip allure.zip -d /opt/allure  
+        sudo ln -s /opt/allure/allure-2.25.0/bin/allure /usr/bin/allure 
+        
+    - name: Generate Allure Report  
+      run: |  
+        mkdir -p allure-report  
+        allure generate --clean allure-results -o allure-report
+
+    - name: Upload Allure Report as artifact  
+      uses: actions/upload-pages-artifact@v3  
+      with:  
+        path: './allure-report'  
+
+    - name: Deploy to GitHub Pages  
+      id: deployment  
+      uses: actions/deploy-pages@v4
+      
     - name: Run tests
       run: mvn clean test
-
-    - name: Load test report history
-      uses: actions/checkout@v3
-      if: always()
-      continue-on-error: true
-      with:
-        ref: gh-pages
-        path: gh-pages
-
-    - name: Build test report
-      uses: simple-elf/allure-report-action@v1.7
-      if: always()
-      with:
-        gh_pages: gh-pages
-        allure_history: allure-history
-        allure_results: build/allure-results
-
-    - name: Publish test report
-      uses: peaceiris/actions-gh-pages@v3
-      if: always()
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: allure-history
