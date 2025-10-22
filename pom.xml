@@ -70,7 +70,7 @@
         </argLine>
         <includes>
             <include>
-                selenide.tests/CollectionsTest.java
+              other.FirstTest.java
             </include>
         </includes>
         </configuration>
