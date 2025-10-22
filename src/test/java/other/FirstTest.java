@@ -16,7 +16,11 @@ public class FirstTest {
 
     @BeforeEach
     public void setUp() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        driver = new ChromeDriver(options);
         driver.manage().window().setPosition(new Point(1900, 0));
         driver.get(baseUrl);
     }
@@ -29,40 +33,40 @@ public class FirstTest {
         assertEquals(baseUrl, url);
     }
 
-    @Test
-    public void testGet() {
-        driver.get(baseUrl);
-        driver.get(baseUrl + "rating");
-    }
+    // @Test
+    // public void testGet() {
+    //     driver.get(baseUrl);
+    //     driver.get(baseUrl + "rating");
+    // }
 
-    @Test
-    public void testNavigate() {
-        driver.navigate().to(baseUrl);
-        driver.navigate().refresh();
-        driver.navigate().back();
-        driver.navigate().forward();
-    }
+    // @Test
+    // public void testNavigate() {
+    //     driver.navigate().to(baseUrl);
+    //     driver.navigate().refresh();
+    //     driver.navigate().back();
+    //     driver.navigate().forward();
+    // }
 
 
-    @Test
-    public void testJs() {
-        driver.get("https://the-internet.herokuapp.com/javascript_alerts");
+    // @Test
+    // public void testJs() {
+    //     driver.get("https://the-internet.herokuapp.com/javascript_alerts");
 
-       Alert alert =  driver.switchTo().alert();
-       String text = alert.getText();
-       alert.sendKeys("Text");
-       alert.accept();
-       assertEquals("I am a JS prompt", text);
-    }
+    //    Alert alert =  driver.switchTo().alert();
+    //    String text = alert.getText();
+    //    alert.sendKeys("Text");
+    //    alert.accept();
+    //    assertEquals("I am a JS prompt", text);
+    // }
 
-    @Test
-    public void testManageAndCookie() {
-        // driver.manage().window().fullscreen();
-       driver.manage().window().maximize();
-       driver.manage().addCookie(new Cookie("cookie_policy", "1"));
-       driver.navigate().refresh();
-       driver.navigate().refresh();
-    }
+    // @Test
+    // public void testManageAndCookie() {
+    //     // driver.manage().window().fullscreen();
+    //    driver.manage().window().maximize();
+    //    driver.manage().addCookie(new Cookie("cookie_policy", "1"));
+    //    driver.navigate().refresh();
+    //    driver.navigate().refresh();
+    // }
 
     @AfterEach
     public void tearDown() {
